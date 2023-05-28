@@ -32,9 +32,9 @@ class Downloader:
                                                count=min(self._pc - offset, 100))['items']
             for post in posts_raw:
                 post = {**_only_keys(post, {'id', 'owner_id', 'date', 'text'}),
-                        'likes': post['likes']['count'],
-                        'reposts': post['reposts']['count'],
-                        'views': post['views']['count']}
+                        'likes': post.get('likes', {'count': 0})['count'],
+                        'reposts': post.get('reposts', {'count': 0})['count'],
+                        'views': post.get('views', {'count': 0})['count']}
                 post['text'] = post['text'].replace('\n', '\\n')
                 all_posts.append(post)
         posts_df = pd.DataFrame(all_posts, columns=['id', 'owner_id', 'date', 'views', 'likes', 'reposts', 'text'])
