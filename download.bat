@@ -1,0 +1,1 @@
+python downloader_main.py -26284064 100 500 -o 27000 -f test_data/
